@@ -1,0 +1,32 @@
+# MATLAB artifacts
+*.asv
+*.m~
+*.mex*
+*.slx.r*
+*.mlappinstall
+*.mlpkginstall
+
+# Simulink
+*.slxc
+slprj/
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Course materials (copyrighted)
+*.pdf
+
+# Third-party libraries (install separately)
+mylibs/iso2mesh-1.9.6/
+
+# Generated outputs
+results/*.fig
+
+# Claude Code
+.claude/plans/
