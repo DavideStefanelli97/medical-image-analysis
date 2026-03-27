@@ -80,6 +80,9 @@ fy      = Dy(g);
 
 % Evolution loop for φ (LV)
 area_intime1 = zeros(maxIter, 1);
+gif_lv = fullfile(PROJECT_ROOT, 'results', 'seg_ventricles', 'evolution_lv.gif');
+gif_frame = 0;
+
 for i = 1:maxIter
     phi1 = phi1 + dt * g .* ((eps * K(phi1) - 1) .* Grad(phi1)) + ni .* Gup(phi1, fx, fy);
     A = phi1 < 0;
@@ -90,6 +93,17 @@ for i = 1:maxIter
         imagesc(Image_IM_filt); colormap gray; axis image off; hold on;
         contour(phi1, [0 0], 'g', 'LineWidth', 1.5);
         title(['LV — Iteration ', num2str(i)]); drawnow; hold off;
+
+        % Export frame to GIF
+        gif_frame = gif_frame + 1;
+        frame = getframe(gcf);
+        im = frame2im(frame);
+        [A_gif, map] = rgb2ind(im, 256);
+        if gif_frame == 1
+            imwrite(A_gif, map, gif_lv, 'gif', 'LoopCount', Inf, 'DelayTime', 0.15);
+        else
+            imwrite(A_gif, map, gif_lv, 'gif', 'WriteMode', 'append', 'DelayTime', 0.15);
+        end
     end
 
     if i > 140 && area_intime1(i) == area_intime1(i - 10)
@@ -116,6 +130,8 @@ plotLSF(phi2, X, Y, 'OverlayImage', Image_IM);
 
 ni = 0.8;  % Lower advection force for RV (more conservative)
 area_intime2 = zeros(maxIter, 1);
+gif_rv = fullfile(PROJECT_ROOT, 'results', 'seg_ventricles', 'evolution_rv.gif');
+gif_frame = 0;
 
 for i = 1:maxIter
     phi2 = phi2 + dt * g .* ((eps * K(phi2) - 1) .* Grad(phi2)) + ni .* Gup(phi2, fx, fy);
@@ -129,6 +145,17 @@ for i = 1:maxIter
         contour(phi1, [0 0], 'm', 'LineWidth', 2);
         title(['RV — Iteration ', num2str(i)]);
         drawnow; hold off;
+
+        % Export frame to GIF
+        gif_frame = gif_frame + 1;
+        frame = getframe(gcf);
+        im = frame2im(frame);
+        [A_gif, map] = rgb2ind(im, 256);
+        if gif_frame == 1
+            imwrite(A_gif, map, gif_rv, 'gif', 'LoopCount', Inf, 'DelayTime', 0.15);
+        else
+            imwrite(A_gif, map, gif_rv, 'gif', 'WriteMode', 'append', 'DelayTime', 0.15);
+        end
     end
 
     if i > 140 && area_intime2(i) == area_intime2(i - 10)

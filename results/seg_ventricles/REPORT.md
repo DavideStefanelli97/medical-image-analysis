@@ -64,6 +64,8 @@ The initial level-set function (phi) is shown as a 3D surface and as a zero-leve
 
 ### 3.2 Malladi-Sethian Evolution
 
+![LV Evolution](evolution_lv.gif)
+
 The level-set evolves according to:
 
 phi_t = g * (epsilon * K - 1) * |grad(phi)| + ni * Gup(phi, fx, fy)
@@ -95,6 +97,8 @@ The RV is segmented with the same model but a lower advection weight (ni=0.8 vs 
 ![LSF Right Ventricle](lsf_right_ventricle.jpg)
 
 ### 4.2 Malladi-Sethian Evolution
+
+![RV Evolution](evolution_rv.gif)
 
 | Parameter | Value |
 |-----------|-------|

@@ -96,6 +96,8 @@ The initial level-set function (phi) is shown as a 3D surface (left) and as a ze
 
 ### 4.2 Chan-Vese Evolution
 
+![Kidney Evolution](evolution_kidney.gif)
+
 | Parameter | Value |
 |-----------|-------|
 | Curvature weight (mu) | 0.5 |
@@ -123,6 +125,8 @@ The internal medulla structures are segmented from the **contrast-enhanced image
 The small initial contour is placed inside one of the medulla pyramids. The level-set will expand to capture all connected medulla tissue.
 
 ### 5.2 Chan-Vese Evolution
+
+![Medulla Evolution](evolution_medulla.gif)
 
 ![Chan-Vese Final Iteration](chanvese_final_iter.jpg)
 

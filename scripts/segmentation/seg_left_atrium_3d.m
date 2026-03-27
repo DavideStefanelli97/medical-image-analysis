@@ -146,6 +146,9 @@ end
 
 %% ======================= 5. SLICE-WISE VISUALIZATION ==========================
 fprintf('\n=== Final Overlay: φ vs Post-Processed Mask ===\n');
+
+gif_path = fullfile(PROJECT_ROOT, 'results', 'seg_left_atrium_3d', 'segmentation_slices.gif');
+
 for i = 1:num_slices
     slice_id = i + slice_range(1) - 1;
     figure(500); clf;
@@ -153,8 +156,21 @@ for i = 1:num_slices
     contour(PHI(:,:,i), [0 0], 'b', 'LineWidth', 1.0);           % φ (raw)
     contour(PHI_bin(:,:,i), [0.5 0.5], 'c--', 'LineWidth', 1.5); % cleaned
     title(sprintf('Slice %d — φ (blue) vs mask (light blue --)', slice_id));
+    drawnow;
+
+    % Export frame to animated GIF
+    frame = getframe(gcf);
+    im = frame2im(frame);
+    [A, map] = rgb2ind(im, 256);
+    if i == 1
+        imwrite(A, map, gif_path, 'gif', 'LoopCount', Inf, 'DelayTime', 0.5);
+    else
+        imwrite(A, map, gif_path, 'gif', 'WriteMode', 'append', 'DelayTime', 0.5);
+    end
+
     pause(0.3);
 end
+fprintf('✓ GIF saved to: %s\n', gif_path);
 
 %% ========================== 6. 3D MESH RECONSTRUCTION =========================
 fprintf('\n=== 3D Mesh Reconstruction of Left Atrium ===\n');

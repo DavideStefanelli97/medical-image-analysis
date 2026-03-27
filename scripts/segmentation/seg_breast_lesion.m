@@ -81,6 +81,8 @@ fx = Dx(g);
 fy = Dy(g);
 
 area_intime = zeros(maxIter, 1);
+gif_path = fullfile(PROJECT_ROOT, 'results', 'seg_breast_lesion', 'evolution_lesion.gif');
+gif_frame = 0;
 
 for i = 1:maxIter
     phi = phi + dt * g .* ((eps * K(phi) - 1) .* Grad(phi)) + ni .* Gup(phi, fx, fy);
@@ -94,6 +96,17 @@ for i = 1:maxIter
         title(['Iteration: ', num2str(i)]);
         drawnow;
         hold off;
+
+        % Export frame to GIF
+        gif_frame = gif_frame + 1;
+        frame = getframe(gcf);
+        im = frame2im(frame);
+        [A_gif, map] = rgb2ind(im, 256);
+        if gif_frame == 1
+            imwrite(A_gif, map, gif_path, 'gif', 'LoopCount', Inf, 'DelayTime', 0.15);
+        else
+            imwrite(A_gif, map, gif_path, 'gif', 'WriteMode', 'append', 'DelayTime', 0.15);
+        end
     end
 
     % Stop if area stabilizes

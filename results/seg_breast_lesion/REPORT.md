@@ -68,6 +68,8 @@ phi_t = g * (epsilon * K - 1) * |grad(phi)| + ni * Gup(phi, fx, fy)
 
 where K is the curvature, g is the edge indicator, and Gup is the upwind advection operator that drives the contour toward edges.
 
+![Lesion Evolution](evolution_lesion.gif)
+
 ![Final Iteration](evolution_final_iter.jpg)
 
 | Parameter | Value |

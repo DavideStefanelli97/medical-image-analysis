@@ -181,6 +181,8 @@ time_step      = 0.1;
 epsilon        = 0.1;
 
 segmented_area = zeros(1, max_iterations);
+gif_kidney = fullfile(PROJECT_ROOT, 'results', 'seg_kidney_medulla', 'evolution_kidney.gif');
+gif_frame = 0;
 
 for i = 1:max_iterations
     % Compute curvature
@@ -209,6 +211,17 @@ for i = 1:max_iterations
         figure(100); imagesc(Image); colormap gray; axis image; hold on;
         contour(phi, [0 0], 'r', 'LineWidth', 1);
         title(sprintf('Chan-Vese Iteration %d', i)); drawnow;
+
+        % Export frame to GIF
+        gif_frame = gif_frame + 1;
+        frame = getframe(gcf);
+        im = frame2im(frame);
+        [A, map] = rgb2ind(im, 256);
+        if gif_frame == 1
+            imwrite(A, map, gif_kidney, 'gif', 'LoopCount', Inf, 'DelayTime', 0.15);
+        else
+            imwrite(A, map, gif_kidney, 'gif', 'WriteMode', 'append', 'DelayTime', 0.15);
+        end
     end
 
     % Check for area convergence
@@ -278,6 +291,8 @@ lambda2 = -30;
 ni      = 0.0;
 
 segmented_area = zeros(1, max_iterations);
+gif_medulla = fullfile(PROJECT_ROOT, 'results', 'seg_kidney_medulla', 'evolution_medulla.gif');
+gif_frame = 0;
 
 for i = 1:max_iterations
     % Compute curvature
@@ -305,6 +320,17 @@ for i = 1:max_iterations
         figure(100); imagesc(Image); colormap gray; axis image; hold on;
         contour(phi, [0 0], 'r', 'LineWidth', 1);
         title(sprintf('Chan-Vese Iteration %d', i)); drawnow;
+
+        % Export frame to GIF
+        gif_frame = gif_frame + 1;
+        frame = getframe(gcf);
+        im = frame2im(frame);
+        [A, map] = rgb2ind(im, 256);
+        if gif_frame == 1
+            imwrite(A, map, gif_medulla, 'gif', 'LoopCount', Inf, 'DelayTime', 0.15);
+        else
+            imwrite(A, map, gif_medulla, 'gif', 'WriteMode', 'append', 'DelayTime', 0.15);
+        end
     end
 
     % Early stopping
