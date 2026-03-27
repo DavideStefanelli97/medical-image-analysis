@@ -22,19 +22,19 @@ A full 360-degree sweep is performed at 0.5-degree resolution (720 candidate ang
 
 | Metric | Optimization | Best Angle |
 |--------|-------------|------------|
-| **MI** (Mutual Information) | Maximize | ~330 deg |
-| **NCC** (Normalized Cross-Correlation) | Maximize | ~330 deg |
-| **SSD** (Sum of Squared Differences) | Minimize | ~330 deg |
+| **MI** (Mutual Information) | Maximize | 340.0 deg |
+| **NCC** (Normalized Cross-Correlation) | Maximize | 340.0 deg |
+| **SSD** (Sum of Squared Differences) | Minimize | 340.0 deg |
 
 ![Metric Trends](metric_trends.jpg)
 
-All three metrics converge to the same optimal angle, with sharp, well-defined peaks (MI, NCC) or a valley (SSD). The NCC curve shows the cleanest peak, reaching ~0.99 at optimal alignment. The secondary peaks near 180 degrees reflect the approximate bilateral symmetry of the brain.
+All three metrics converge to the same optimal angle (340.0 deg), with sharp, well-defined peaks (MI, NCC) or a valley (SSD). The NCC curve shows the cleanest peak, reaching 0.9967 at optimal alignment. The secondary peaks near 180 degrees reflect the approximate bilateral symmetry of the brain.
 
 ---
 
 ## 3. Registration Report
 
-After applying the optimal rotation angle (determined by NCC), the registered image is compared against the reference:
+After applying the optimal rotation angle (340.0 deg, determined by NCC), the registered image is compared against the reference:
 
 ![Registration Report](registration_report.jpg)
 
@@ -53,16 +53,16 @@ After applying the optimal rotation angle (determined by NCC), the registered im
 
 ![Metrics Before vs After](metrics_before_after.jpg)
 
-| Metric | Before Registration | After Registration | Improvement |
+| Metric | Before Registration | After Registration | Change |
 |--------|:---:|:---:|:---:|
-| **MI** | 1.12 | 2.91 | +160% |
-| **NCC** | 0.88 | 0.99 | +13% |
-| **SSD** | 3.9 x 10^9 | 2.3 x 10^9 | -41% |
+| **MI** | 1.1180 | 2.9144 | +160.7% |
+| **NCC** | 0.8834 | 0.9967 | +12.8% |
+| **SSD** | 4.2066 x 10^9 | 2.3944 x 10^9 | -43.1% |
 
 All metrics confirm successful registration:
-- MI nearly triples, indicating much stronger statistical dependence between the two images.
-- NCC approaches the theoretical maximum of 1.0, reflecting near-perfect linear correlation.
-- SSD drops by 41%, showing significantly reduced pixel-wise intensity differences.
+- MI increases by 160.7%, indicating much stronger statistical dependence between the two images.
+- NCC reaches 0.9967, approaching the theoretical maximum of 1.0 -- near-perfect linear correlation.
+- SSD drops by 43.1%, showing significantly reduced pixel-wise intensity differences.
 
 ---
 
@@ -74,6 +74,8 @@ All metrics confirm successful registration:
 | Search strategy | Exhaustive angular sweep |
 | Angular range | 0 -- 359.5 deg |
 | Angular resolution | 0.5 deg |
+| Candidates evaluated | 720 |
 | Interpolation | Bilinear |
-| Optimal angle selection | NCC (highest peak) |
+| Optimal angle | 340.0 deg (all three metrics agree) |
 | Input modality | T2-weighted MRI (monomodal) |
+| Image size | 512 x 512 pixels |
