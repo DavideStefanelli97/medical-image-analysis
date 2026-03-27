@@ -8,9 +8,14 @@ Rigid translation-only registration of multimodal brain images (MRI T2, MRI DWI,
 
 Three brain imaging modalities are loaded from DICOM files. The MRI T2 scan serves as the fixed reference due to its superior anatomical contrast and spatial resolution.
 
-| | MRI T2 (Reference) | MRI DWI | PET |
-|:---|:---:|:---:|:---:|
-| **Image + Histogram** | ![T2](input_T2.jpg) | ![DWI](input_DWI.jpg) | ![PET](input_PET.jpg) |
+**MRI T2 (Reference)**
+![T2](input_T2.jpg)
+
+**MRI DWI**
+![DWI](input_DWI.jpg)
+
+**PET**
+![PET](input_PET.jpg)
 
 | Property | MRI T2 | MRI DWI | PET |
 |----------|:---:|:---:|:---:|
