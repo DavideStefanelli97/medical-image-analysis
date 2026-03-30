@@ -128,8 +128,6 @@ The small initial contour is placed inside one of the medulla pyramids. The leve
 
 ![Medulla Evolution](evolution_medulla.gif)
 
-![Chan-Vese Final Iteration](chanvese_final_iter.jpg)
-
 | Parameter | Value |
 |-----------|-------|
 | Curvature weight (mu) | 0.5 |
